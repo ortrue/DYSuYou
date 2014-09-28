@@ -17,12 +17,9 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 import cn.com.dayang.suyou.constants.Constants;
 import cn.com.dayang.suyou.enums.MethodTypeEnum;
@@ -31,7 +28,12 @@ import cn.com.dayang.suyou.spring.CustomizedPropertyPlaceholder;
 import cn.com.dayang.suyou.util.AppUtil;
 import cn.com.dayang.suyou.vo.SysUser;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
 public class SessionActiveFilter implements Filter{
+	public final static Logger logger = Logger.getLogger(SessionActiveFilter.class);
 	
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
@@ -50,7 +52,7 @@ public class SessionActiveFilter implements Filter{
 				treeMap.put("reqHost",host+"/checksession");
 				treeMap.put("Method", MethodTypeEnum.METHOD_GET.name());
 				String responseBody=this.checksession(treeMap,user);
-				System.out.println("check service session:  "+responseBody);
+				//System.out.println("check service session:  "+responseBody);
 				if(StringUtils.isNotBlank(responseBody)){
 					JSONObject reqJson = new JSONObject(responseBody);
 					int code=reqJson.getInt("Code");
@@ -82,7 +84,7 @@ public class SessionActiveFilter implements Filter{
 			checkF=LicenseManager.getInstance().validate(signature);
 		}
 		if(!checkF){
-			System.out.println("系统证书过期,请联系软件供应商!");
+			logger.info("系统证书过期,请联系软件供应商!");
 		}
 		return checkF;
 	}
