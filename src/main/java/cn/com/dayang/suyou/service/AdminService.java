@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.dayang.suyou.base.dao.BaseDAOImpl;
-import cn.com.dayang.suyou.repository.UsersDao;
 import cn.com.dayang.suyou.util.FileSizeUtil;
 import cn.com.dayang.suyou.vo.MailTrendDetailModel;
 import cn.com.dayang.suyou.vo.MailTrendModel;
@@ -30,9 +29,6 @@ public class AdminService {
 
 	@Autowired
 	private BaseDAOImpl baseDAOImpl;
-	
-	@Autowired
-	private UsersDao usersDao;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> Page<T> getMailTrendListAllByPage(Map<String, Object> params,int pageNum,int pageSize){
