@@ -1,0 +1,243 @@
+
+
+/*首页头标签*/
+/*padding-left:左填充与用户信息层的左边距相同*/
+.hdTab
+{ 
+	width:100%; 
+	height: 33px; 
+	left:190px; 
+	top: 30px; 
+	position:relative; 
+	line-height:2em; 
+	/*border: 1px solid red;*/
+}
+
+/*首页主体表格样式*/
+.tbMain
+{ 
+	width: 100%; 
+	height:100%;
+}
+
+/*首面主体单元格样式*/
+/*border-right: 1px solid #3C7AB4;设置表格右边框*/
+.tbLft
+{ 
+	width: 190px; 
+	border-right: 1px solid #3C7AB4;
+}
+
+/*首页顶部菜单样式*/
+.menuTop
+{
+	width:100%; 
+	height:38px;	
+}
+div.menuTop a.mTopBak
+{
+	width:95px;
+	height:38px;
+	position:relative;
+	float:left;
+	display: block;
+	background-image: url("images/mTopBak_bg.gif");
+	background-repeat: no-repeat;
+	text-decoration: none;
+}
+div.menuTop a.mTopBak:hover
+{
+	background-image: url("images/mTopBak2_bg.gif");
+}
+div.menuTop a.mTopFwd
+{
+	width:95px;
+	height:38px;
+	position:relative;
+	float:left;
+	display: block;
+	background-image: url("images/mTopFwd_bg.gif");
+	background-repeat: no-repeat;
+	text-decoration: none;
+}
+div.menuTop a.mTopFwd:hover
+{
+	background-image: url("images/mTopFwd2_bg.gif");
+}
+.mTopText
+{
+	left:45px;
+	top:10px;
+	position:absolute;
+	color: #000000;
+	font-size:12px;
+	cursor: pointer;
+}
+
+/*首页菜单样式*/
+.menu
+{ 
+	width:100%;
+	height:100%;
+	position:relative;
+}
+
+/*主体内容层样式*/
+.content
+{ 
+	width:100%; 
+	height:100%; 
+	position:relative;
+}
+
+
+/*显示/隐藏标签表格样式*/
+table.tabOn,table.tabOff
+{
+	height: 30px;
+	cursor: pointer;
+	float: left;	
+	table-layout: fixed;
+}
+
+/*****显示标签表格样式*******/
+/*标签左边单元格*/
+table.tabOn td.tLft
+{
+	width:5px;
+	background-image: none;
+	background-color:#11619A;
+	background-repeat: no-repeat;
+}
+
+/*标签中间单元格*/
+table.tabOn td.tBdy
+{
+	background-image:none;
+	background-color:#11619A;
+	vertical-align: middle;
+	text-align: center;
+	color: #ffffff;
+	font-weight: normal; 
+	overflow: hidden;
+	font-size:14px;
+	padding: 2px 10px 0;
+   
+}
+
+/*标签按钮单元格*/
+table.tabOn td.tBtn
+{
+	width:11px; 
+	background-image:none;background-color:#11619A;
+	padding-top: 5px;
+}
+
+/*标签按钮超连接*/
+table.tabOn td a.tCls
+{
+	width:11px; height:11px;
+	background-image: url("images/tCls_bg.gif");
+	background-repeat:no-repeat;
+	display: block;
+}
+table.tabOn td a.tCls:hover
+{
+	background-image: url("images/tCls_bg_hover.gif");
+}
+
+/*标签右边单元格*/
+table.tabOn td.tRit
+{
+	width:5px;
+	background-image:none;background-color:#11619A;border-top-right-radius: 3px;
+	background-repeat: no-repeat;
+}
+
+
+/*****隐藏标签表格样式*******/
+/*标签左边单元格*/
+table.tabOff td.tLft
+{
+	width:5px;
+	background-image: none;
+	background-color:#E9F2F9;
+	border-top: none;border-left: none;
+	background-repeat: no-repeat;border-top-left-radius: 3px;
+}
+
+/*标签中间单元格*/
+table.tabOff td.tBdy
+{
+	background-image: none;background-color:#E9F2F9;
+	vertical-align: middle;
+	text-align: center;
+	color: #333;text-shadow: 1px 0 0 #FFFFFF;
+	font-weight:normal; 
+	overflow: hidden;
+	padding: 2px 10px 0;
+	font-size:14px;
+}
+
+/*标签按钮单元格*/
+table.tabOff td.tBtn
+{
+	width:11px; 
+	background-image:none;background-color:#E9F2F9;
+	padding-top: 5px;
+}
+
+/*标签按钮超连接*/
+table.tabOff td a.tCls
+{
+	height:11px;
+	width:11px;
+	background-image: url("images/tCls2_bg.gif");
+	background-repeat:no-repeat;
+	display: block;
+}
+table.tabOff td a.tCls:hover
+{
+	background-image: url("images/tCls2_bg_hover.gif");
+}
+
+/*标签右边单元格*/
+table.tabOff td.tRit
+{
+	width:5px;
+	background-image:none;
+	background-color:#E9F2F9;
+	border-top-right-radius:5px;
+	border-top: none;
+	border-right: none;
+	background-repeat: no-repeat;
+}
+
+/*关闭所有标签样式*/
+div.tabClsAll
+{
+	height:30px;
+	width: 26px;
+	line-height: 30px;
+	cursor: pointer;
+	float: left;
+	display: block;
+	position:relative;	
+}
+
+/*关闭所有标签超连接样式*/
+div.tabClsAll i
+{
+	height:30px;
+	width:24px;
+	line-height: 22px;
+	background-image: url("images/tClsAll_bg.gif");
+	background-repeat:no-repeat;
+	display: block;
+	margin-top:1px;	
+}
+
+div.tabClsAll i:hover
+{
+	background-image: url("images/tClsAll2_bg.gif");
+}

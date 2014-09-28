@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userTrendMapper">
+    
+    <resultMap type="cn.com.dayang.suyou.vo.MailTrendModel" id="mailTrendModel">
+		<result column="id" property="mailId"/>
+		<result column="title" property="title"/>
+		<result column="sendername" property="sendUser"/>
+		<result column="recnames" property="recipientUser"/>
+		<result column="attachmentspace" property="attachmentspace"/>
+		<result column="sendtime" property="gmtTime"/>
+	</resultMap>
+  
+    <resultMap type="cn.com.dayang.suyou.vo.MailTrendDetailModel" id="mailTrendDetailModel">
+		<result column="mailId" property="mailId"/>
+		<result column="title" property="title"/>
+		<result column="senduid" property="sendUid"/>
+		<result column="sendname" property="sendName"/>
+		<result column="recipientuid" property="recipientUid"/>
+		<result column="recipientname" property="recipientName"/>
+		<result column="sendtime" property="sendTime"/>
+		<result column="downloaduid" property="downloadUid"/>
+		<result column="downloadname" property="downloadName"/>
+		<result column="downloadtime" property="downloadTime"/>
+		<result column="resourceid" property="resourceId"/>
+		<result column="resourcename" property="resourceName"/>
+		<result column="content" property="content"/>
+	</resultMap>
+    
+	<select id="getMailTrendListAllByPage" parameterType="Map" resultMap="mailTrendModel">
+		select id,title,sendername,recnames,attachmentspace,sendtime from mails where 1=1
+		<if test="title != null ">
+	    	and title like  concat('%',#{title},'%')
+	    </if>
+	</select>
+	
+	<select id="getMailTrendListAllByPageCount" parameterType="Map"  resultType="int">
+		select count(*) from mails where 1=1
+		<if test="title != null ">
+    		and title like  concat('%',#{title},'%')
+    	</if>
+	</select>
+	
+	<select id="getMailTrendDetailListByRecipients" parameterType="java.lang.Integer" resultMap="mailTrendDetailModel">
+		select 
+		m.id as mailid,
+		m.title as title,
+		m.senderid as senduid,
+		m.sendername as sendname,
+		r.recid as recipientuid,
+		u.`name` as recipientname,
+		m.sendtime as sendtime
+		from mails m 
+		left join recipients r
+		on r.mailid=m.id 
+		LEFT JOIN users u 
+		on r.recid=u.id
+		where  m.senderid = r.senderid and m.id=#{mailid}
+	</select>
+	
+	
+	<select id="getMailTrendDetailListByResdownloads" parameterType="Map" resultMap="mailTrendDetailModel">
+		select 
+		m.id as mailid,
+		m.title as title,
+		m.senderid as senduid,
+		m.sendername as sendname,
+		d.createtime as downloadtime,
+		d.recid as downloaduid,
+		u.`name` as downloadname,
+		s.id as resourceid,
+		s.resname as resourcename
+		from resdownloads d  left JOIN resources s 
+		ON d.resourceid = s.id LEFT JOIN  mails m 
+		ON m.id = d.mailid LEFT JOIN users u
+		ON d.recid = u.id
+		where d.recid=#{recId} and d.mailid=#{mailid}
+	</select>
+	
+</mapper> 

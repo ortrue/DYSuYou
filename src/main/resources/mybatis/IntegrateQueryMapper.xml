@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="integrateQueryMapper">
+    
+    <resultMap type="cn.com.dayang.suyou.vo.UsersModel" id="usersModel">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="passwd" property="passwd"/>
+		<result column="salt" property="salt"/>
+		<result column="type" property="type"/>
+		<result column="status" property="status"/>
+		<result column="createtime" property="createtime"/>
+		<result column="singupinfo" property="singupinfo"/>
+		<result column="spacetotal" property="spacetotal"/>
+		<result column="spaceused" property="spaceused"/>
+		<result column="downloadflowtotal" property="downloadflowtotal"/>
+		<result column="downloadflowused" property="downloadflowused"/>
+		<result column="chargetypeid" property="chargetypeid"/>
+		<result column="activetime" property="activetime"/>
+		<result column="roles" property="roles"/>
+		
+	</resultMap>
+  
+	<select id="getUsersAllByPage" parameterType="Map" resultMap="usersModel">
+		select 
+		id,
+		name,
+		email,
+		passwd,
+		salt,
+		type, 
+		status,
+		createtime,
+		singupinfo,
+		spacetotal,
+		spaceused,
+		downloadflowtotal,
+		downloadflowused,
+		chargetypeid,
+		activetime,
+		roles
+		from users where 1=1
+		
+		<if test="startTime != null ">
+	    	and createtime &gt;=  #{startTime}
+	    </if>
+	    
+		<if test="endTime != null ">
+	    	and createtime &lt;=  #{endTime}
+	    </if>
+		
+	</select>
+	
+	<select id="getUsersAllByPageCount" parameterType="Map" resultType="int">
+		select count(*) from users where 1=1
+		
+		<if test="startTime != null ">
+	    	and createtime &gt;=  #{startTime}
+	    </if>
+	    
+		<if test="endTime != null ">
+	    	and createtime &lt;=  #{endTime}
+	    </if>
+		
+	</select>
+	
+	<select id="getMailCountByUserId" parameterType="java.lang.Integer"  resultType="int">
+		select count(*) from mails where senderid=#{userId}
+	</select>
+	
+	<select id="getAttaCountByUserId" parameterType="java.lang.Integer"  resultType="int">
+		select count(*) from resources where senderid=#{userId}
+	</select>
+	
+	<select id="getMailTotalByUserId" parameterType="java.lang.Integer"  resultType="java.lang.Double">
+		select sum(attachmentspace) from mails where senderid=#{userId}
+	</select>
+	
+	<select id="getAttaTotalByUserId" parameterType="java.lang.Integer"  resultType="java.lang.Double">
+		select sum(size) from resources where senderid=#{userId}
+	</select>
+	
+	<select id="getAttaTotalSize"  resultType="java.lang.Double">
+		select sum(size) from resources 
+	</select>
+	
+	<select id="getMailsActiveUser"  resultType="java.lang.Integer">
+		select senderid from mails m group by m.senderid
+	</select>
+	
+	<select id="getResourceActiveUser"  resultType="java.lang.Integer">
+		select senderid from resources s group by s.senderid
+	</select>
+	
+	<select id="getDownloadActiveUser"  resultType="java.lang.Integer">
+		select senderid from resources s group by s.senderid
+	</select>
+	
+</mapper> 

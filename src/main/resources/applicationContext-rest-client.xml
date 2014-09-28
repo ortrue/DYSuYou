@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="true">
+
+	<description>RestTemplet配置</description>
+	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate"> 
+        <property name="messageConverters"> 
+            <list> 
+                <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter" /> 
+                <bean id="formHttpMessageConverter" class="org.springframework.http.converter.FormHttpMessageConverter" /> 
+            </list> 
+        </property> 
+    </bean> 
+	
+</beans>
